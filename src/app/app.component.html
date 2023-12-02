@@ -1,3 +1,7 @@
 <div [class]="theme" class="container">
-  <mat-checkbox>Check me</mat-checkbox>
+  <div class="loading" *ngIf="loading; else showImages">Loading...</div>
+
+  <ng-template #showImages>
+    <img *ngFor="let img of images" src="img" />
+  </ng-template>
 </div>

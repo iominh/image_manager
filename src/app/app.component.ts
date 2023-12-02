@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { ApiService } from './api.service';
+import { ApiService, API_PATH } from './api.service';
+
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,9 @@ export class AppComponent implements OnInit {
 
   theme = 'dark-theme'; // or 'light-theme'
 
+  images: string[] = [];
+  loading = true;
+
   constructor(private apiService: ApiService) {
 
   }
@@ -20,8 +24,16 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.apiService.getSomeData().subscribe(files => {
+      this.loading = false;
       console.log(files);
+      if (files instanceof Array) {
+        this.images = files.map(file => {
+          return `${API_PATH}/images/${file}`;
+        });
+        console.log(this.images);
+      }
     })
   }
 }

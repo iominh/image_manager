@@ -10,6 +10,9 @@ const imagePath = args[0] || '/Users/iominh/images';
 
 console.log('Serving static images from', imagePath);
 
+const cors = require('cors');
+app.use(cors());
+
 // Serve images as static resources
 app.use('/images', express.static(imagePath));
 
@@ -33,5 +36,3 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });
 
-const cors = require('cors');
-app.use(cors());

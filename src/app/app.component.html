@@ -2,6 +2,12 @@
   <div class="loading" *ngIf="loading; else showImages">Loading...</div>
 
   <ng-template #showImages>
-    <img class="image" *ngFor="let image of images" [src]="image" />
+    <div class="images-container">
+      <img class="image" *ngFor="let image of images" [src]="image" />
+    </div>
   </ng-template>
+</div>
+
+<div [class]="theme" class="stats-container" *ngIf="!loading">
+  <div>Number images: {{images.length}}</div>
 </div>

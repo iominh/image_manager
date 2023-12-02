@@ -2,6 +2,8 @@
 
 ```
 node server/index.js W:\\stable_diffusion\\15_alienware\\2023-11-30
+
+node server/index.js /Users/iominh14/Downloads/f1
 ```
 
 # ImageManager

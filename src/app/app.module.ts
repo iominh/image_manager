@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './main/main.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,13 @@ import { MainComponent } from './main/main.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    BrowserAnimationsModule,
+  ],
+  exports: [
+    MatButtonModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

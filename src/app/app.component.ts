@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
 
   images: string[] = [];
   loading = true;
+  selectedIndex = 0;
 
   constructor(private apiService: ApiService) {
 

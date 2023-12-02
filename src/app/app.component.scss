@@ -1,3 +1,5 @@
+$backgroundColor: #111;
+
 .container {
     display: flex;
     height: 100%;
@@ -15,4 +17,11 @@
 
 .dark-theme {
     width: 100%;
+}
+
+.image {
+    background-color: $backgroundColor;
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
 }

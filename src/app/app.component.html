@@ -3,7 +3,7 @@
 
   <ng-template #showImages>
     <div class="images-container">
-      <img class="image" *ngFor="let image of images" [src]="image" />
+      <img class="image" [src]="images[selectedIndex]" />
     </div>
   </ng-template>
 </div>

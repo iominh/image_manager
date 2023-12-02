@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const args = process.argv.slice(2); // Slice the first two elements
 const imagePath = args[0] || '/Users/iominh/images';
 
 console.log('Serving static images from', imagePath);

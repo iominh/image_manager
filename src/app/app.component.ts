@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'image-manager';
+
+  theme = 'dark-theme'; // or 'light-theme'
+
+  toggleTheme() {
+    this.theme = this.theme === 'dark-theme' ? 'light-theme' : 'dark-theme';
+  }
 }

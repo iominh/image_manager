@@ -2,8 +2,12 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const imagePath = args[0] || '/Users/iominh/images';
+
+console.log('Serving static images from', imagePath);
+
 // Serve images as static resources
-app.use('/images', express.static('/Users/iominh/images'));
+app.use('/images', express.static(imagePath));
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);

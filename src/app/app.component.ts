@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, HostListener, OnInit} from '@angular/core';
 import { ApiService, API_PATH } from './api.service';
 
 
@@ -15,6 +15,24 @@ export class AppComponent implements OnInit {
   images: string[] = [];
   loading = true;
   selectedIndex = 0;
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    // Your code to handle the keydown event goes here
+    console.log('Key pressed:', event.key);
+
+    if (event.key === 'ArrowRight') {
+      this.selectedIndex += 1;
+      event.stopPropagation();
+    } else if (event.key === 'ArrowLeft') {
+      this.selectedIndex -= 1;
+      event.stopPropagation();
+    }
+
+    // Loop around.
+    this.selectedIndex = this.selectedIndex >= this.images.length ? 0 : this.selectedIndex;
+    this.selectedIndex = this.selectedIndex < 0 ? this.images.length - 1 : this.selectedIndex;
+  }
 
   constructor(private apiService: ApiService) {
 

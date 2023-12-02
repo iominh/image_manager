@@ -1,3 +1,9 @@
+# Examples run
+
+```
+node server/index.js W:\\stable_diffusion\\15_alienware\\2023-11-30
+```
+
 # ImageManager
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.4.

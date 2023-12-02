@@ -2,6 +2,6 @@
   <div class="loading" *ngIf="loading; else showImages">Loading...</div>
 
   <ng-template #showImages>
-    <img *ngFor="let img of images" src="img" />
+    <img class="image" *ngFor="let image of images" [src]="image" />
   </ng-template>
 </div>

@@ -69,6 +69,8 @@ export class AppComponent implements OnInit {
     } else if (event.key === 'b') {
       this.openSnackBar('Saved best image' + this.selectedIndex);
       this.bestImages.add(selectedImage);
+    } else if (event.key === '1') {
+      this.copyFiles();
     }
   }
 

@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
         this.images = files.map(file => {
           return `${API_PATH}/images/${file}`;
         });
-        this.images = this.images.filter(image => image.includes('png'));
+        this.images = this.images.filter(image => image.includes('png') || image.includes('jpeg'));
         console.log(this.images);
       }
     })

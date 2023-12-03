@@ -18,21 +18,33 @@ app.use('/images', express.static(imagePath));
 
 app.get('/list-files', (req, res) => {
     fs.readdir(imagePath, (err, files) => {
-      if (err) {
-        res.status(500).send('Error reading directory');
-        return;
-      }
-  
-      // Filter out directories and only keep files
-      let fileList = files.filter(file => {
-        return fs.statSync(path.join(imagePath, file)).isFile();
-      });
-  
-      res.json(fileList);
+        if (err) {
+            res.status(500).send('Error reading directory');
+            return;
+        }
+
+        // Filter out directories and only keep files
+        let fileList = files.filter(file => {
+            return fs.statSync(path.join(imagePath, file)).isFile();
+        });
+
+        res.json(fileList);
     });
-  });
+});
+
+app.post('/create-dirs', (req, res) => {
+    const dirs = ['best', 'fix', 'saved'];
+    Promise.all(dirs.map(dirPath => {
+        const fullPath = path.join(imagePath, dirPath); // Construct full path
+        return fs.promises.mkdir(fullPath, { recursive: true });
+    })).then(() => {
+        res.send({ message: 'Directories created successfully' });
+    }).catch(err => {
+        res.status(500).send({ message: 'Error creating directories', error: err });
+    });
+});
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
+    console.log(`Server running at http://localhost:${port}/`);
 });
 

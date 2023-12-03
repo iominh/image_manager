@@ -15,5 +15,9 @@ export class ApiService {
     return this.http.get(`${API_PATH}/list-files`);
   }
 
+  createDirs(): Observable<Object> {
+    return this.http.post(`${API_PATH}/create-dirs`, {});
+  }
+
   // more methods for POST, PUT, DELETE...
 }

@@ -92,6 +92,13 @@ export class AppComponent implements OnInit {
     })
   }
 
+  createDirectories() {
+    this.snackBar.open('Creating directories');
+    this.apiService.createDirs().subscribe(result => {
+      this.snackBar.open('Created directories result: ' + JSON.stringify(result));
+    })
+  }
+
   openSnackBar(message: string, action: string = 'Close', duration: number = 3000) {
     this.snackBar.open(message, action, {
       duration: duration,

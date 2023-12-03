@@ -12,7 +12,9 @@ const imagePath = args[0] || '/Users/iominh/images';
 async function copyFiles(fileList) {
     try {
         for (const file of fileList) {
-            await fs.copyFile(file.source, file.destination);
+            await fs.copyFile(file.source, file.destination, (result) => {
+                console.log('copyFile result' + result);
+            });
         }
         return true;
     } catch (err) {
@@ -60,21 +62,19 @@ app.post('/create-dirs', (req, res) => {
     });
 });
 
-app.post('/copyfile', (req, res) => {
-    const sourcePath = path.join(__dirname, req.body.sourcePath); // Ensure sourcePath is sanitized
-    const destPath = path.join(__dirname, req.body.destPath); // Ensure destPath is sanitized
-  
-    fs.copyFile(sourcePath, destPath, (err) => {
-      if (err) {
-        return res.status(500).send({ message: 'Error copying file', error: err });
-      }
-      res.send({ message: 'File copied successfully' });
-    });
-  });
-
   // API endpoint to copy multiple files
 app.post('/copy-files', async (req, res) => {
-    const fileList = req.body; // Expecting an array of { source, destination }
+    let fileList = req.body; // Expecting an array of { source, destination }
+
+    fileList = fileList.map(file => {
+        const split = file.source.split('/');
+        const fileName = split[split.length - 1];
+        return {
+            source: `${imagePath}/${fileName}`,
+            destination: `${imagePath}/${file.destination}/${fileName}`
+        }
+    });
+
     console.log('Copying files', fileList);
     if (await copyFiles(fileList)) {
         res.status(200).send('Files copied successfully.');

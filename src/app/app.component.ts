@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit} from '@angular/core';
 import { ApiService, API_PATH, CopyFile } from './api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -72,10 +73,13 @@ export class AppComponent implements OnInit {
     } else if (event.key === '1') {
       this.copyFiles();
     }
+    this.updateUrlWithQueryParameter();
   }
 
   constructor(
     private apiService: ApiService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private snackBar: MatSnackBar) {
 
   }
@@ -96,6 +100,11 @@ export class AppComponent implements OnInit {
         console.log(this.images);
       }
     })
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      const index = params['index'];
+      this.selectedIndex = +index;
+    });
   }
 
   createDirectories() {
@@ -149,5 +158,14 @@ export class AppComponent implements OnInit {
     } else {
       return Array.from(this.fixImages);
     }
+  }
+
+  private updateUrlWithQueryParameter() {
+    const queryParams = { index: this.selectedIndex };
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute, // if you want to navigate relative to the current route
+      queryParams: queryParams,
+      queryParamsHandling: 'merge', // or 'preserve' to keep existing ones
+    });
   }
 }

@@ -9,5 +9,6 @@
 </div>
 
 <div [class]="theme" class="stats-container" *ngIf="!loading">
-  <div>Number images: {{images.length}}</div>
+  <div class="count">Number images: {{images.length}}</div>
+  <div *ngFor="let savedImage of savedImages">{{ savedImage }}</div>
 </div>

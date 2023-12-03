@@ -25,7 +25,8 @@ export class AppComponent implements OnInit {
     // Your code to handle the keydown event goes here
     console.log('Key pressed:', event.key);
 
-    if (event.key === 'ArrowRight' || event.key === 'Arrow.Left' || event.key === ' ') {
+    if (event.key === 'ArrowRight' || event.key === 'Arrow.Left' || 
+        event.key === ' ' || event.key === 'Bkacspace') {
       event.stopPropagation();
       event.preventDefault();
     }
@@ -42,7 +43,11 @@ export class AppComponent implements OnInit {
     const selectedImage = this.images[this.selectedIndex];
 
     if (event.key === ' ') {
-      this.openSnackBar('Pressed space');
+      this.openSnackBar('Saved image', selectedImage);
+      this.savedImages.add(selectedImage);
+    } else if (event.key === 'Backspace') {
+      this.openSnackBar('Removed image', selectedImage);
+      this.savedImages.delete(selectedImage);
     }
   }
 
@@ -60,7 +65,6 @@ export class AppComponent implements OnInit {
     this.loading = true;
     this.apiService.getSomeData().subscribe(files => {
       this.loading = false;
-      console.log(files);
       if (files instanceof Array) {
         this.images = files.map(file => {
           return `${API_PATH}/images/${file}`;
@@ -75,5 +79,9 @@ export class AppComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: duration,
     });
+  }
+
+  savedImagesArray(): string[] {
+    return Array.from(this.savedImages);
   }
 }

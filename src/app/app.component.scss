@@ -11,8 +11,14 @@ $backgroundColor: #111;
 }
 
 .stats-container {
+    align-items: center;
+    flex-direction: column;
     justify-content: center;
     padding: 32px;
+
+    .count {
+        margin-bottom: 32px;
+    }
 }
 
 .dark-theme {

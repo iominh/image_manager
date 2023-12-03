@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit} from '@angular/core';
-import { ApiService, API_PATH } from './api.service';
+import { ApiService, API_PATH, CopyFile } from './api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
@@ -101,6 +101,16 @@ export class AppComponent implements OnInit {
 
   copyFiles() {
     this.openSnackBar('Copying files');
+    const fileList: CopyFile[] = [];
+    this.bestImages.forEach(img => {
+      fileList.push({
+        source: img,
+        destination: 'best'
+      });
+    })
+    this.apiService.copyFiles(fileList).subscribe(result => {
+      this.openSnackBar('Copied files' + JSON.stringify(result));
+    })
   }
 
   openSnackBar(message: string, action: string = 'Close', duration: number = 3000) {

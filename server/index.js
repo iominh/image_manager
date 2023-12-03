@@ -26,6 +26,9 @@ console.log('Serving static images from', imagePath);
 const cors = require('cors');
 app.use(cors());
 
+// Middleware to parse JSON bodies
+app.use(express.json());
+
 // Serve images as static resources
 app.use('/images', express.static(imagePath));
 
@@ -72,7 +75,7 @@ app.post('/copyfile', (req, res) => {
   // API endpoint to copy multiple files
 app.post('/copy-files', async (req, res) => {
     const fileList = req.body; // Expecting an array of { source, destination }
-    console.log(fileList);
+    console.log('Copying files', fileList);
     if (await copyFiles(fileList)) {
         res.status(200).send('Files copied successfully.');
     } else {

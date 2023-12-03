@@ -24,8 +24,8 @@ export class ApiService {
     return this.http.post(`${API_PATH}/create-dirs`, {});
   }
 
-  copyFiles(fileList: string[]): Observable<Object> {
-    return this.http.post(`${API_PATH}/copy-files`, {fileList});
+  copyFiles(fileList: CopyFile[]): Observable<Object> {
+    return this.http.post(`${API_PATH}/copy-files`, fileList);
   }
 
   // more methods for POST, PUT, DELETE...

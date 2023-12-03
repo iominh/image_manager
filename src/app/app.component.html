@@ -9,6 +9,26 @@
 </div>
 
 <div [class]="theme" class="stats-container" *ngIf="!loading">
-  <div class="count">Number images: {{images.length}}</div>
-  <div *ngFor="let savedImage of savedImages">{{ savedImage }}</div>
+  <div class="stat">Number images: {{images.length}}</div>
+
+  <div class="section">
+    <div class="title">Best Images</div>
+    <div class="images">
+      <img *ngFor="let bestImage of bestImages" [src]="bestImage" />
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="title">Saved Images</div>
+    <div class="images">
+      <img *ngFor="let savedImage of savedImages" [src]="savedImage" />
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="title">Images To Fix</div>
+    <div class="images">
+      <img *ngFor="let fixImage of fixImages" [src]="fixImage" />
+    </div>
+  </div>
 </div>

@@ -21,8 +21,23 @@ $backgroundColor: #111;
     justify-content: center;
     padding: 32px;
 
-    .count {
+    .stat {
         margin-bottom: 32px;
+    }
+
+    .section {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-top: 16px;
+        
+        .title {
+            font-weight: bold;
+        }
+        
+        img {
+            width: 100px;
+        }
     }
 }
 

@@ -15,7 +15,20 @@ export class AppComponent implements OnInit {
 
   images: string[] = [];
 
+  /**
+   * 
+   */
   savedImages = new Set<string>();
+
+  /**
+   * Best images, maybe used for cover.
+   */
+  bestImages = new Set<string>();
+
+  /**
+   * Images that have promise but need to be fixed.
+   */
+  fixImages = new Set<string>();
 
   loading = true;
   selectedIndex = 0;
@@ -43,11 +56,15 @@ export class AppComponent implements OnInit {
     const selectedImage = this.images[this.selectedIndex];
 
     if (event.key === ' ') {
-      this.openSnackBar('Saved image', selectedImage);
       this.savedImages.add(selectedImage);
     } else if (event.key === 'Backspace') {
-      this.openSnackBar('Removed image', selectedImage);
       this.savedImages.delete(selectedImage);
+      this.fixImages.delete(selectedImage);
+      this.bestImages.delete(selectedImage);
+    } else if (event.key === 'f') {
+      this.fixImages.add(selectedImage);
+    } else if (event.key === 'b') {
+      this.bestImages.add(selectedImage);
     }
   }
 
@@ -81,7 +98,13 @@ export class AppComponent implements OnInit {
     });
   }
 
-  savedImagesArray(): string[] {
-    return Array.from(this.savedImages);
+  savedImagesArray(type: 'saved' | 'best' | 'fixed'): string[] {
+    if (type === 'saved') {
+      return Array.from(this.savedImages);
+    } else if (type === 'best') {
+      return Array.from(this.bestImages);
+    } else {
+      return Array.from(this.fixImages);
+    }
   }
 }

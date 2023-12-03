@@ -21,12 +21,15 @@ export class AppComponent implements OnInit {
     // Your code to handle the keydown event goes here
     console.log('Key pressed:', event.key);
 
+    if (event.key === 'ArrowRight' || event.key === 'Arrow.Left') {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+
     if (event.key === 'ArrowRight') {
       this.selectedIndex += 1;
-      event.stopPropagation();
     } else if (event.key === 'ArrowLeft') {
       this.selectedIndex -= 1;
-      event.stopPropagation();
     }
 
     // Loop around.

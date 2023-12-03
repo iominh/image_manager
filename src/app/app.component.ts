@@ -57,13 +57,17 @@ export class AppComponent implements OnInit {
 
     if (event.key === ' ' || event.key === 's') {
       this.savedImages.add(selectedImage);
+      this.openSnackBar('Saved image' + this.selectedIndex);
     } else if (event.key === 'Backspace') {
       this.savedImages.delete(selectedImage);
       this.fixImages.delete(selectedImage);
       this.bestImages.delete(selectedImage);
+      this.openSnackBar('Deleted image' + this.selectedIndex);
     } else if (event.key === 'f') {
       this.fixImages.add(selectedImage);
+      this.openSnackBar('Saved image for fix' + this.selectedIndex);
     } else if (event.key === 'b') {
+      this.openSnackBar('Saved best image' + this.selectedIndex);
       this.bestImages.add(selectedImage);
     }
   }

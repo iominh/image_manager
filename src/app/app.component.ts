@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit} from '@angular/core';
 import { ApiService, API_PATH } from './api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -13,6 +14,9 @@ export class AppComponent implements OnInit {
   theme = 'dark-theme'; // or 'light-theme'
 
   images: string[] = [];
+
+  savedImages = new Set<string>();
+
   loading = true;
   selectedIndex = 0;
 
@@ -21,7 +25,7 @@ export class AppComponent implements OnInit {
     // Your code to handle the keydown event goes here
     console.log('Key pressed:', event.key);
 
-    if (event.key === 'ArrowRight' || event.key === 'Arrow.Left') {
+    if (event.key === 'ArrowRight' || event.key === 'Arrow.Left' || event.key === ' ') {
       event.stopPropagation();
       event.preventDefault();
     }
@@ -30,14 +34,21 @@ export class AppComponent implements OnInit {
       this.selectedIndex += 1;
     } else if (event.key === 'ArrowLeft') {
       this.selectedIndex -= 1;
-    }
+    } 
 
     // Loop around.
     this.selectedIndex = this.selectedIndex >= this.images.length ? 0 : this.selectedIndex;
     this.selectedIndex = this.selectedIndex < 0 ? this.images.length - 1 : this.selectedIndex;
+    const selectedImage = this.images[this.selectedIndex];
+
+    if (event.key === ' ') {
+      this.openSnackBar('Pressed space');
+    }
   }
 
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private snackBar: MatSnackBar) {
 
   }
 
@@ -58,5 +69,11 @@ export class AppComponent implements OnInit {
         console.log(this.images);
       }
     })
+  }
+
+  openSnackBar(message: string, action: string = 'Close', duration: number = 3000) {
+    this.snackBar.open(message, action, {
+      duration: duration,
+    });
   }
 }

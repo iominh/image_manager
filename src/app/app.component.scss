@@ -1,9 +1,14 @@
 $backgroundColor: #111;
 
-.container {
+.container, .loading {
     display: flex;
     height: 100%;
     width: 100%;
+}
+
+.loading {
+    align-items: center;
+    justify-content: center;
 }
 
 .images-container, .stats-container {

@@ -161,7 +161,7 @@ export class AppComponent implements OnInit {
   }
 
   private updateUrlWithQueryParameter() {
-    const queryParams = { index: this.selectedIndex };
+    const queryParams = { index: this.selectedIndex || 0 };
     this.router.navigate([], {
       relativeTo: this.activatedRoute, // if you want to navigate relative to the current route
       queryParams: queryParams,

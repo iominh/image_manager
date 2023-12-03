@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
     this.selectedIndex = this.selectedIndex < 0 ? this.images.length - 1 : this.selectedIndex;
     const selectedImage = this.images[this.selectedIndex];
 
-    if (event.key === ' ') {
+    if (event.key === ' ' || event.key === 's') {
       this.savedImages.add(selectedImage);
     } else if (event.key === 'Backspace') {
       this.savedImages.delete(selectedImage);

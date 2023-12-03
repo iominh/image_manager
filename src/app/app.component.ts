@@ -108,9 +108,25 @@ export class AppComponent implements OnInit {
         destination: 'best'
       });
     })
-    this.apiService.copyFiles(fileList).subscribe(result => {
-      this.openSnackBar('Copied files' + JSON.stringify(result));
+    this.savedImages.forEach(img => {
+      fileList.push({
+        source: img,
+        destination: 'saved'
+      });
     })
+    this.fixImages.forEach(img => {
+      fileList.push({
+        source: img,
+        destination: 'fix'
+      });
+    })
+    if (fileList.length > 0) {
+      this.apiService.copyFiles(fileList).subscribe(result => {
+        this.openSnackBar('Copied files' + JSON.stringify(result));
+      })
+    } else {
+      this.openSnackBar('No images to copy');
+    }
   }
 
   openSnackBar(message: string, action: string = 'Close', duration: number = 3000) {
@@ -119,7 +135,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  imagesArray(type: 'saved' | 'best' | 'fixed'): string[] {
+  imagesArray(type: 'saved' | 'best' | 'fix'): string[] {
     if (type === 'saved') {
       return Array.from(this.savedImages);
     } else if (type === 'best') {

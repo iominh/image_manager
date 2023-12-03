@@ -102,7 +102,7 @@ export class AppComponent implements OnInit {
     })
 
     this.activatedRoute.queryParams.subscribe(params => {
-      const index = params['index'];
+      const index = params['index'] || 0;
       this.selectedIndex = +index;
     });
   }

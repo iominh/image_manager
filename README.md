@@ -1,7 +1,7 @@
 # Examples run Dec 2
 
 ```
-node server/index.js W:\\stable_diffusion\\15_alienware\\2023-11-30
+node server/index.js W:\\stable_diffusion\\15_alienware\\2023-12-02
 node server/index.js W:\\stable_diffusion\\output\\2023-12-02
 node server/index.js W:\\stable_diffusion\\output\\2023-12-01
 W:\stable_diffusion\output\2023-12-01

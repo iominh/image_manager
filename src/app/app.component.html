@@ -11,8 +11,13 @@
 <div [class]="theme" class="stats-container" *ngIf="!loading">
   <div class="stat">Number images: {{images.length}}</div>
 
-  <button mat-raised-button color="primary" 
-          (click)="createDirectories()">Create Directories</button>
+  <div class="button-row">
+    <button mat-raised-button color="primary" 
+    (click)="createDirectories()">Create Directories</button>
+
+    <button mat-raised-button color="primary" 
+        (click)="copyFiles()">Copy Files</button>
+  </div>
 
   <div class="section">
     <div class="title">Best Images</div>

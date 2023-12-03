@@ -8,6 +8,19 @@ const port = 3000;
 const args = process.argv.slice(2); // Slice the first two elements
 const imagePath = args[0] || '/Users/iominh/images';
 
+// Function to copy multiple files
+async function copyFiles(fileList) {
+    try {
+        for (const file of fileList) {
+            await fs.copyFile(file.source, file.destination);
+        }
+        return true;
+    } catch (err) {
+        console.error('Error copying files:', err);
+        return false;
+    }
+}
+
 console.log('Serving static images from', imagePath);
 
 const cors = require('cors');
@@ -43,6 +56,30 @@ app.post('/create-dirs', (req, res) => {
         res.status(500).send({ message: 'Error creating directories', error: err });
     });
 });
+
+app.post('/copyfile', (req, res) => {
+    const sourcePath = path.join(__dirname, req.body.sourcePath); // Ensure sourcePath is sanitized
+    const destPath = path.join(__dirname, req.body.destPath); // Ensure destPath is sanitized
+  
+    fs.copyFile(sourcePath, destPath, (err) => {
+      if (err) {
+        return res.status(500).send({ message: 'Error copying file', error: err });
+      }
+      res.send({ message: 'File copied successfully' });
+    });
+  });
+
+  // API endpoint to copy multiple files
+app.post('/copy-files', async (req, res) => {
+    const fileList = req.body; // Expecting an array of { source, destination }
+    console.log(fileList);
+    if (await copyFiles(fileList)) {
+        res.status(200).send('Files copied successfully.');
+    } else {
+        res.status(500).send('Failed to copy files.');
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);

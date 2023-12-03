@@ -95,17 +95,21 @@ export class AppComponent implements OnInit {
   createDirectories() {
     this.snackBar.open('Creating directories');
     this.apiService.createDirs().subscribe(result => {
-      this.snackBar.open('Created directories result: ' + JSON.stringify(result));
+      this.openSnackBar('Created directories result: ' + JSON.stringify(result));
     })
+  }
+
+  copyFiles() {
+    this.openSnackBar('Copying files');
   }
 
   openSnackBar(message: string, action: string = 'Close', duration: number = 3000) {
     this.snackBar.open(message, action, {
-      duration: duration,
+      duration,
     });
   }
 
-  savedImagesArray(type: 'saved' | 'best' | 'fixed'): string[] {
+  imagesArray(type: 'saved' | 'best' | 'fixed'): string[] {
     if (type === 'saved') {
       return Array.from(this.savedImages);
     } else if (type === 'best') {

@@ -54,3 +54,8 @@ $backgroundColor: #111;
     background-color: $backgroundColor;
     object-fit: contain;
 }
+
+.button-row {
+    display: flex;
+    gap: 6px;
+}
